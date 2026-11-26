@@ -14,4 +14,12 @@ organised by Don Bosco Youth Centre & Football Academy (DBYCFA), Varadarajanpet.
 
 ## Hosting
 
-The site is static. It is served with GitHub Pages from the `main` branch root.
+The site is static. GitHub Pages serves it from the `gh-pages` branch at
+https://leofelixlaw.github.io/fr-schlooz-trophy/
+
+To publish a change, commit it on `main` and update `gh-pages` to match:
+
+```bash
+git push origin main
+git push origin main:gh-pages
+```
