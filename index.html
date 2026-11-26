@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04140a">
 <title>Fr. Schlooz Ever Rolling Trophy</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Saira+Condensed:wght@500;700;900&family=Rubik:wght@400;500;600&family=Anek+Tamil:wght@500;700;800&family=Hind+Madurai:wght@400;500;700&display=swap">
@@ -26,7 +27,9 @@
   --font-body: 'Rubik', 'Hind Madurai', 'Helvetica Neue', Arial, sans-serif;
   color-scheme: dark;
 }
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+section, footer { scroll-margin-top: 72px; }
+.btn:active, .copy:active, .lb-btn:active, .shot:active { transform: scale(.97); }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--night); color: var(--chalk); font-family: var(--font-body); font-size: 1.05rem; line-height: 1.5; overflow-x: hidden; }
 img { max-width: 100%; }
@@ -62,8 +65,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .nav { display: flex; gap: 1.1rem; flex-wrap: wrap; font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: .95rem; }
 .nav a { color: var(--chalk); text-decoration: none; }
 .nav a:hover { color: var(--gold); }
+.menu-btn { display: none; align-items: center; gap: .45rem; background: transparent; color: var(--chalk); border: 2px solid var(--gold); font: 700 .85rem var(--font-head); letter-spacing: .08em; text-transform: uppercase; padding: .4rem .7rem; min-height: 40px; cursor: pointer; }
+.menu-btn .bars { display: inline-block; width: 18px; height: 2px; background: currentColor; position: relative; }
+.menu-btn .bars::before, .menu-btn .bars::after { content: ""; position: absolute; left: 0; width: 18px; height: 2px; background: currentColor; }
+.menu-btn .bars::before { top: -6px; } .menu-btn .bars::after { top: 6px; }
 .lang { display: inline-flex; border: 2px solid var(--gold); background: var(--night); }
-.lang button { font: 700 .85rem var(--font-head); letter-spacing: .06em; background: transparent; color: var(--chalk); border: 0; padding: .35rem .7rem; cursor: pointer; font-family: 'Saira Condensed', 'Anek Tamil', sans-serif; }
+.lang button { min-height: 36px; font: 700 .85rem var(--font-head); letter-spacing: .06em; background: transparent; color: var(--chalk); border: 0; padding: .35rem .7rem; cursor: pointer; font-family: 'Saira Condensed', 'Anek Tamil', sans-serif; }
 .lang button[aria-pressed="true"] { background: var(--gold); color: var(--night); }
 
 /* Hero: animated floodlit pitch */
@@ -187,7 +194,8 @@ section { padding-block: 3.5rem; }
 .person:first-of-type { border-top: 0; }
 .person .who { font-weight: 600; font-size: 1.05rem; }
 .person .num { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; letter-spacing: .05em; font-variant-numeric: tabular-nums; user-select: all; }
-.copy { font: 600 .72rem var(--font-body); text-transform: uppercase; letter-spacing: .1em; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: .25rem .5rem; cursor: pointer; }
+.copy { font: 600 .72rem var(--font-body); text-transform: uppercase; letter-spacing: .1em; background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: .45rem .7rem; min-height: 36px; cursor: pointer; }
+.person .num a { color: inherit; text-decoration: none; }
 .copy:hover { background: var(--gold); color: var(--night); }
 .wa-link { display: inline-flex; align-items: center; gap: .5rem; margin-top: .9rem; background: var(--wa); color: var(--night); text-decoration: none; font-family: var(--font-head); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; padding: .55rem 1rem; }
 .wa-link svg { width: 20px; height: 20px; }
@@ -236,12 +244,37 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
 .wa-float .tip { position: absolute; right: 70px; top: 50%; transform: translateY(-50%); background: var(--chalk); color: var(--night); font: 700 .8rem var(--font-head); letter-spacing: .06em; text-transform: uppercase; padding: .35rem .7rem; white-space: nowrap; border-radius: 4px; opacity: 0; transition: opacity .2s; pointer-events: none; }
 .wa-float:hover .tip, .wa-float:focus-visible .tip { opacity: 1; }
 
+/* Mobile action bar */
+.mobile-bar { display: none; position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; background: rgba(4, 20, 10, .96); backdrop-filter: blur(8px); border-top: 3px solid var(--gold); padding: .5rem max(12px, env(safe-area-inset-right, 0px)) calc(.5rem + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); grid-template-columns: 1fr 1fr 1fr; gap: .5rem; }
+.mobile-bar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-height: 52px; text-decoration: none; font-family: var(--font-head); font-weight: 700; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; border: 2px solid var(--gold); color: var(--chalk); background: transparent; }
+.mobile-bar a svg { width: 22px; height: 22px; fill: currentColor; }
+.mobile-bar a.call { background: var(--gold); color: var(--night); border-color: var(--gold); }
+.mobile-bar a.wa { background: var(--wa); color: var(--night); border-color: var(--wa); }
+.gal-hint { display: none; text-align: center; color: var(--chalk-dim); font-size: .85rem; margin-top: .6rem; font-family: var(--font-head); letter-spacing: .08em; text-transform: uppercase; }
+
 @media (max-width: 820px) {
-  .hero .wrap, .tribute .wrap { grid-template-columns: 1fr; }
-  .portrait-frame { width: min(80%, 320px); }
-  .nav { display: none; }
+  .hero .wrap, .tribute .wrap { grid-template-columns: 1fr; gap: 1.6rem; }
+  .hero { padding-bottom: 2.4rem; }
+  .portrait-frame { width: min(74%, 300px); }
+  .crest-hero { width: 112px; }
+  .hero h1 { font-size: clamp(2.6rem, 13vw, 4.6rem); }
+  .topbar .wrap { position: relative; flex-wrap: nowrap; }
+  .brand { font-size: 1rem; }
+  .nav-row { gap: .5rem; }
+  .menu-btn { display: inline-flex; }
+  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--night); border-bottom: 3px solid var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,.6); }
+  .topbar.open .nav { display: flex; }
+  .nav a { display: block; padding: .95rem max(16px, env(safe-area-inset-left, 0px)); border-top: 1px solid rgba(255,255,255,.1); font-size: 1.05rem; }
+  .nav a:active { background: rgba(255,204,31,.15); }
   .podium { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step.p1 { order: -1; }
   .step .block { min-height: 0 !important; }
+  .mobile-bar { display: grid; }
+  .wa-float { display: none; }
+  footer { padding-bottom: 7rem; }
+  .lightbox .lb-bar { padding-bottom: 4.5rem; }
+  section { padding-block: 2.8rem; }
+  .section-head { margin-bottom: 1.3rem; }
   .loc-grid, .gal-grid { grid-template-columns: 1fr 1fr; }
   .beam { min-width: 180px; }
 }
@@ -249,8 +282,15 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
   .scoreboard { grid-template-columns: 1fr; }
   .scoreboard .vs { padding-block: .2rem; }
   .ticket { grid-template-columns: 1fr; }
-  .gal-grid { grid-template-columns: 1fr; }
+  .gal-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: .6rem; padding-bottom: .4rem; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .gal-grid::-webkit-scrollbar { display: none; }
+  .shot { flex: 0 0 84%; scroll-snap-align: center; }
+  .gal-hint { display: block; }
   .loc-grid { grid-template-columns: 1fr; }
+  .map-card { min-height: 240px; }
+  .pool-banner strong { font-size: 1.6rem; }
+  .ticket .amt { font-size: 2.4rem; }
+  .cell .big { font-size: 1.6rem; }
   .ticket .stub { writing-mode: horizontal-tb; }
   .ticket .main { border-right: 0; border-bottom: 3px dashed var(--turf); }
 }
@@ -336,7 +376,7 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
       <span>DBYCFA<small data-t="place">Varadarajanpet</small></span>
     </div>
     <div class="nav-row">
-      <nav class="nav" aria-label="Page sections">
+      <nav class="nav" id="site-nav" aria-label="Page sections">
         <a href="#prizes" data-t="nav_prizes">Prizes</a>
         <a href="#details" data-t="nav_days">Match days</a>
         <a href="#tribute" data-t="nav_fr">Fr. Schlooz</a>
@@ -348,6 +388,7 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
         <button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" id="lang-ta" data-lang="ta" aria-pressed="false">தமிழ்</button>
       </div>
+      <button class="menu-btn" type="button" id="menu-btn" aria-expanded="false" aria-controls="site-nav"><span class="bars" aria-hidden="true"></span><span data-t="menu">Menu</span></button>
     </div>
   </div>
 </header>
@@ -489,6 +530,7 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
       <button class="shot" type="button" data-i="6"><img src="gallery/07.jpg" alt="" loading="lazy" width="1200" height="801"><span class="cap" data-t="g7">Ready for kick-off</span><span class="zoom" aria-hidden="true">+</span></button>
       <button class="shot" type="button" data-i="7"><img src="gallery/08.jpg" alt="" loading="lazy" width="1200" height="800"><span class="cap" data-t="g8">On the line</span><span class="zoom" aria-hidden="true">+</span></button>
     </div>
+    <p class="gal-hint" data-t="gal_hint">Swipe for more photos · tap to enlarge</p>
   </div>
 </section>
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -547,8 +589,8 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
     <div class="contact-grid">
       <div class="card">
         <h3 data-t="contact">Contact</h3>
-        <div class="person"><span class="who" data-t="c1">Manicksha</span><span class="num">90922 35103 <button class="copy" type="button" data-num="9092235103" data-t="copy">Copy</button></span></div>
-        <div class="person"><span class="who" data-t="c2">Pargo</span><span class="num">78689 19530 <button class="copy" type="button" data-num="7868919530" data-t="copy">Copy</button></span></div>
+        <div class="person"><span class="who" data-t="c1">Manicksha</span><span class="num"><a href="tel:+919092235103">90922 35103</a> <button class="copy" type="button" data-num="9092235103" data-t="copy">Copy</button></span></div>
+        <div class="person"><span class="who" data-t="c2">Pargo</span><span class="num"><a href="tel:+917868919530">78689 19530</a> <button class="copy" type="button" data-num="7868919530" data-t="copy">Copy</button></span></div>
         <a class="wa-link" href="https://wa.me/919092235103?text=Hello%2C%20I%20want%20to%20register%20a%20team%20for%20the%20Fr.%20Schlooz%20Ever%20Rolling%20Trophy%202026." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#whatsapp"/></svg><span data-t="wa">Chat on WhatsApp</span></a>
       </div>
       <div class="card">
@@ -567,6 +609,12 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
     <span data-t="foot2">Don Bosco Youth Centre &amp; Football Academy, Varadarajanpet</span>
   </div>
 </footer>
+
+<nav class="mobile-bar" aria-label="Quick actions">
+  <a class="call" href="tel:+919092235103"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span data-t="bar_call">Call</span></a>
+  <a class="wa" href="https://wa.me/919092235103?text=Hello%2C%20I%20want%20to%20register%20a%20team%20for%20the%20Fr.%20Schlooz%20Ever%20Rolling%20Trophy%202026." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#whatsapp"/></svg><span>WhatsApp</span></a>
+  <a class="reg" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-4.2A3 3 0 0 0 9.2 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-2 14-4-4 1.4-1.4L10 14.2l6.6-6.6L18 9z"/></svg><span data-t="bar_reg">Register</span></a>
+</nav>
 
 <a class="wa-float" href="https://wa.me/919092235103?text=Hello%2C%20I%20want%20to%20register%20a%20team%20for%20the%20Fr.%20Schlooz%20Ever%20Rolling%20Trophy%202026." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg aria-hidden="true"><use href="#whatsapp"/></svg>
@@ -600,7 +648,7 @@ var T = {
     g1: 'Chasing the ball', g2: 'Celebrating a goal', g3: 'The crowd roars', g4: 'Under the floodlights', g5: 'Evening practice', g6: 'The ground from above', g7: 'Ready for kick-off', g8: 'On the line',
     loc_eye: 'Venue', loc_h2: 'Find the <em>ground</em>', loc_name: 'Don Bosco Higher Secondary School', loc_addr: 'Don Bosco Youth Centre ground, Varadarajanpet, Tamil Nadu',
     loc_tip: 'Matches are played on 26 and 27 December. Call the co-ordinators for fixture timings.', loc_open: 'Open in Google Maps', loc_dir: 'Get directions', loc_sat: 'Satellite view',
-    lb_of: 'of',
+    lb_of: 'of', menu: 'Menu', bar_call: 'Call', bar_reg: 'Register', gal_hint: 'Swipe for more photos · tap to enlarge',
     contact: 'Contact', c1: 'Manicksha', c2: 'Pargo', copy: 'Copy', copied: 'Copied', selected: 'Selected', wa: 'Chat on WhatsApp',
     org: 'Organised by', org1: 'Don Bosco Youth Centre', org2: 'Rector and Community', coord: 'Co-ordinators', co1: 'Mr. Edwin Louis', co2: 'Mr. Joseph',
     foot1: 'Fr. Schlooz Ever Rolling Trophy · Football Tournament 2026', foot2: 'Don Bosco Youth Centre & Football Academy, Varadarajanpet'
@@ -630,7 +678,7 @@ var T = {
     g1: 'பந்தைத் துரத்தி', g2: 'கோல் கொண்டாட்டம்', g3: 'ரசிகர்களின் ஆரவாரம்', g4: 'விளக்கொளியில்', g5: 'மாலைப் பயிற்சி', g6: 'மேலிருந்து மைதானம்', g7: 'ஆட்டத்திற்குத் தயார்', g8: 'கோட்டின் மீது',
     loc_eye: 'இடம்', loc_h2: 'மைதானத்தை <em>கண்டறியுங்கள்</em>', loc_name: 'டான் போஸ்கோ மேல்நிலைப் பள்ளி', loc_addr: 'டான் போஸ்கோ இளைஞர் மைய மைதானம், வரதராஜன்பேட்டை, தமிழ்நாடு',
     loc_tip: 'போட்டிகள் டிசம்பர் 26, 27 தேதிகளில் நடைபெறும். ஆட்ட நேரங்களுக்கு ஒருங்கிணைப்பாளர்களை அழைக்கவும்.', loc_open: 'Google Maps-ல் திறக்க', loc_dir: 'வழி காட்டு', loc_sat: 'செயற்கைக்கோள் பார்வை',
-    lb_of: '/',
+    lb_of: '/', menu: 'மெனு', bar_call: 'அழை', bar_reg: 'பதிவு', gal_hint: 'மேலும் படங்களுக்கு ஸ்வைப் செய்யவும் · பெரிதாக்க தட்டவும்',
     contact: 'தொடர்புக்கு', c1: 'மாணிக்ஷா', c2: 'பார்கோ', copy: 'நகல்', copied: 'நகலெடுத்தது', selected: 'தேர்ந்தெடுத்தது', wa: 'வாட்ஸ்அப்பில் பேச',
     org: 'ஏற்பாடு', org1: 'டான் போஸ்கோ இளைஞர் மையம்', org2: 'ரெக்டர் மற்றும் சமூகத்தினர்', coord: 'ஒருங்கிணைப்பாளர்கள்', co1: 'திரு. எட்வின் லூயிஸ்', co2: 'திரு. ஜோசப்',
     foot1: 'Fr. சுலூஸ் நினைவு சுழற்கோப்பை · கால்பந்து போட்டி 2026', foot2: 'டான் போஸ்கோ இளைஞர் மையம் & கால்பந்து அகாடமி, வரதராஜன்பேட்டை'
@@ -652,6 +700,15 @@ function setLang(lang) {
 }
 document.querySelectorAll('.lang button').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); }); });
 try { var saved = localStorage.getItem('dbycfa-lang'); if (saved === 'ta') setLang('ta'); } catch (e) {}
+
+var topbar = document.querySelector('.topbar'), menuBtn = document.getElementById('menu-btn');
+menuBtn.addEventListener('click', function () {
+  var open = !topbar.classList.contains('open');
+  topbar.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+document.querySelectorAll('#site-nav a').forEach(function (a) { a.addEventListener('click', function () { topbar.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }); });
+document.addEventListener('click', function (e) { if (!topbar.contains(e.target)) { topbar.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); } });
 
 var shots = Array.prototype.slice.call(document.querySelectorAll('.shot'));
 var lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img'), lbCap = document.getElementById('lb-cap'), lbCount = document.getElementById('lb-count');
