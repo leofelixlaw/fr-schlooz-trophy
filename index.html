@@ -140,12 +140,12 @@ section { padding-block: 3.5rem; }
 .prizes { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,204,31,.14), transparent 70%), linear-gradient(180deg, var(--night), #082d16); position: relative; overflow: hidden; }
 .pool { display: flex; justify-content: center; margin-bottom: 2.2rem; }
 .pool-banner { display: inline-flex; align-items: center; gap: 1rem; background: var(--ball-black); border: 2px solid var(--gold); padding: .5rem 1.2rem .5rem .6rem; box-shadow: 0 0 0 4px var(--night), 0 0 0 6px var(--gold-deep); }
-.pool-banner .cup-big { width: 44px; height: 52px; }
+.pool-banner .cup-big { width: 44px; height: 52px; flex: none; }
 .pool-banner .lbl { font-family: var(--font-head); font-weight: 700; text-transform: uppercase; letter-spacing: .18em; font-size: .8rem; color: var(--chalk-dim); display: block; }
 .pool-banner strong { font-family: var(--font-display); font-weight: 900; font-size: 2rem; line-height: 1; color: var(--gold); text-shadow: 0 0 14px rgba(255,204,31,.55); font-variant-numeric: tabular-nums; }
 .podium { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; align-items: end; max-width: 900px; margin: 0 auto; }
 .step { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; --c1: #e8ecf2; --c2: #8e97a8; --ink: #121a2a; }
-.step .cup { width: 54px; height: auto; margin: 0 auto .4rem; filter: drop-shadow(0 6px 10px rgba(0,0,0,.5)); }
+.step .cup { width: 54px; height: 62px; margin: 0 auto .4rem; filter: drop-shadow(0 6px 10px rgba(0,0,0,.5)); }
 .step .medal { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-weight: 900; font-size: 1.9rem; color: var(--ink); background: radial-gradient(circle at 35% 30%, #ffffff, var(--c1) 40%, var(--c2)); border: 3px solid var(--chalk); box-shadow: 0 6px 16px rgba(0,0,0,.5); margin-bottom: -24px; position: relative; z-index: 1; }
 .step .block { width: 100%; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--c1), var(--c2)); border: 3px solid rgba(255,255,255,.85); border-bottom-width: 10px; padding: 2.1rem .6rem 1rem; display: flex; flex-direction: column; justify-content: flex-end; gap: .25rem; color: var(--ink); box-shadow: 0 16px 30px rgba(0,0,0,.45); }
 .step .block::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,.14) 0 8px, transparent 8px 16px); pointer-events: none; mix-blend-mode: soft-light; }
@@ -153,7 +153,7 @@ section { padding-block: 3.5rem; }
 .step .amt { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.6rem, 4.8vw, 2.8rem); line-height: 1; font-variant-numeric: tabular-nums; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
 .step.p1 { --c1: #ffe36a; --c2: #d19a00; --ink: #3a2600; }
 .step.p1 .block { min-height: 250px; }
-.step.p1 .cup { width: 72px; }
+.step.p1 .cup { width: 72px; height: 84px; }
 .step.p1 .block::before { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.65), transparent); }
 .step.p2 { --c1: #f2f5fa; --c2: #9aa5b8; --ink: #1b2435; }
 .step.p2 .block { min-height: 205px; }
@@ -290,19 +290,25 @@ footer svg { width: 30px; height: 34px; vertical-align: middle; margin-right: .4
   .cta-row { width: 100%; }
   .cta-row .btn { flex: 1 1 auto; text-align: center; }
   /* prizes: a clean list of four rows, no floating cups */
-  .pool { margin-bottom: 1.4rem; }
+  .pool { margin-bottom: 1.2rem; }
+  .pool-banner { width: 100%; justify-content: center; padding: .6rem 1rem; }
   .pool-banner strong { font-size: 1.7rem; }
-  .podium { display: flex; flex-direction: column; align-items: stretch; gap: .7rem; }
-  .step { display: grid; grid-template-columns: 56px 1fr 48px; grid-template-areas: "medal block cup"; align-items: center; gap: .8rem; position: relative; overflow: hidden; padding: .8rem .9rem; background: linear-gradient(135deg, var(--c1), var(--c2)); border: 3px solid rgba(255,255,255,.85); border-left-width: 10px; color: var(--ink); box-shadow: 0 10px 22px rgba(0,0,0,.4); text-align: left; }
+  .podium { display: flex; flex-direction: column; align-items: stretch; gap: .6rem; }
+  .step { display: grid; grid-template-columns: 52px 1fr 48px; grid-template-areas: "medal block cup"; align-items: center; gap: .75rem; position: relative; overflow: hidden; padding: .7rem .85rem .7rem .75rem; background: linear-gradient(120deg, var(--c1), var(--c2)); border: 2px solid rgba(255,255,255,.85); border-left-width: 8px; color: var(--ink); box-shadow: 0 8px 18px rgba(0,0,0,.4); text-align: left; }
+  .step::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,.12) 0 8px, transparent 8px 16px); pointer-events: none; mix-blend-mode: soft-light; }
+  .step > * { position: relative; z-index: 1; }
+  .step.p1 { padding-block: .9rem; border-color: var(--cream); }
   .step.p1 { order: -1; }
-  .step .medal { grid-area: medal; width: 56px; height: 56px; margin: 0; font-size: 1.6rem; }
+  .step .medal { grid-area: medal; width: 52px; height: 52px; margin: 0; font-size: 1.5rem; border-width: 2px; }
   .step .block { grid-area: block; min-height: 0 !important; padding: 0; background: none; border: 0; box-shadow: none; position: static; overflow: visible; align-items: flex-start; gap: .1rem; }
   .step .block::after, .step .block::before { display: none; }
-  .step .cup { grid-area: cup; width: 44px; margin: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
-  .step.p1 .cup { width: 48px; }
-  .step .place { font-size: .78rem; letter-spacing: .12em; }
-  .step .amt { font-size: 2rem; }
-  .step .tag { top: 6px; right: -36px; font-size: .62rem; padding: .12rem 2.4rem; }
+  .step .cup { grid-area: cup; width: 40px; height: 46px; margin: 0; justify-self: end; filter: drop-shadow(0 4px 6px rgba(0,0,0,.4)); }
+  .step.p1 .cup { width: 48px; height: 56px; margin-top: 1rem; }
+  .step .place { font-size: .74rem; letter-spacing: .12em; line-height: 1.2; }
+  .step .amt { font-size: 1.9rem; }
+  .step.p1 .amt { font-size: 2.2rem; }
+  .step .tag { position: absolute; top: 6px; right: 6px; transform: none; font-size: .6rem; letter-spacing: .1em; padding: .18rem .5rem; border-radius: 3px; z-index: 2; }
+  .step.p1 .block { padding-top: .6rem; }
   .ticket { margin-top: 1.6rem; }
   /* details */
   .cell { padding: 1.1rem 1.1rem 1.15rem; }
